@@ -24,7 +24,7 @@ elif nota == '4' or nota == '3' or nota == '2' or nota == '1':
 else:
     print('Valoare invalida')'''
 
-import random
+'''import random
 
 numar = random.randint(1, 50)
 numar1 = int(input("Introdu numar: "))
@@ -36,5 +36,15 @@ while numar1 != numar:
 
     numar1 = int(input("Mai incearca: "))
 
-print('Felicitari, ai ghicit')
+print('Felicitari, ai ghicit')'''
+
+#exercitiul4
+orase = ["București", "Cluj-Napoca", "Timișoara", "Iași", "Sibiu", "Cisnadie", "Valcea"]
+
+for index, oras in enumerate(orase, start=1):
+    print(f"{index}. {oras}")
+
+#Exercitiul 6
+
+
 

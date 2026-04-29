@@ -114,3 +114,13 @@ y=m+v
 print(y)
 
 import matplotlib.pyplot as plt
+x=np.arange(0,3*np.pi,0.1)
+y=np.sin(x)
+
+plt.plot(x,y)
+plt.xlabel('x axis label')
+plt.ylabel('y axis label')
+
+plt.title('Sine')
+plt.legend(['Sine'])
+plt.show()

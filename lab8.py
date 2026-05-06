@@ -1,4 +1,5 @@
 import numpy as np
+from pandas import set_option
 
 a = np.array([1, 2, 3])
 print(a)
@@ -99,22 +100,23 @@ print(np.sum(x, axis=1))
 
 print(np.sum(x, axis=(0, 1)))
 
-y = np.array([[[1, 2, 3, 4], [5, 6, 7, 8]], [[1, 2, 3, 4], [5, 6, 7, 8]], [[1,2,3,4],[5,6,7,8]]])
+y = np.array([[[1, 2, 3, 4], [5, 6, 7, 8]], [[1, 2, 3, 4], [5, 6, 7, 8]], [[1, 2, 3, 4], [5, 6, 7, 8]]])
 
-print(np.mean(y,axis=0))
-print(np.mean(y,axis=1))
+print(np.mean(y, axis=0))
+print(np.mean(y, axis=1))
 
-z=np.array([[10,12,5],[17,11,19]])
-print(np.argmax(z,axis=1))
+z = np.array([[10, 12, 5], [17, 11, 19]])
+print(np.argmax(z, axis=1))
 
 #broadcasting
-m=np.array([[1,2,3],[4,5,6],[7,8,9],[10,11,12]])
-v=np.array([1,0,1])
-y=m+v
+m = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]])
+v = np.array([1, 0, 1])
+y = m + v
 print(y)
 
 import matplotlib.pyplot as plt
-x=np.arange(0,3*np.pi,0.1)
+
+'''x=np.arange(0,3*np.pi,0.1)
 y=np.sin(x)
 
 plt.plot(x,y)
@@ -123,4 +125,28 @@ plt.ylabel('y axis label')
 
 plt.title('Sine')
 plt.legend(['Sine'])
-plt.show()
+plt.show()'''
+
+import pandas as pd
+
+'''data = pd.read_csv('data.csv')
+
+set_option('display.max_columns',None)
+set_option('display.max_rows',None)
+
+
+print(data)
+import os
+print(os.getcwd())'''
+
+data = pd.read_csv('data.csv')
+
+
+print(data.loc[data['Age'] > 40, 'Age'].head(10))
+print(data.loc[(data['Age'] < 25) & (data['Overall'] >=85)])
+print("  ")
+print(data.sort_values(by='Skill Moves', ascending=False))
+print("  ")
+#Contract Valid Until
+print(data[data['Contract Valid Until']==2021])
+

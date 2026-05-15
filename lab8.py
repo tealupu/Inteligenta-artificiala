@@ -1,4 +1,5 @@
 import numpy as np
+import sns
 from pandas import set_option
 
 a = np.array([1, 2, 3])
@@ -149,4 +150,65 @@ print(data.sort_values(by='Skill Moves', ascending=False))
 print("  ")
 #Contract Valid Until
 print(data[data['Contract Valid Until']==2021])
+
+randuri,coloane=data.shape
+print(f'Avem {randuri} randuri si coloane {coloane} ')
+
+nationalitati=data["Nationality"].value_counts().head()
+print(nationalitati)
+
+'''plt.figure(figsize=(10,10))
+
+plt.pie(
+    nationalitati,
+    labels=nationalitati.index,
+    autopct='%1.1f%%',
+    startangle=90
+
+)
+plt.show()'''
+
+medii=data.groupby('Nationality')[['SprintSpeed', 'Acceleration']].mean()
+print(f"Mediile sunt {medii}")
+
+data["Position"]=data["Position"].fillna("UNKNOWN")
+print(data["Position"])
+
+medieclub=data.groupby("Club")["Overall"].mean()
+club_top = medieclub.idxmax()
+media_top = medieclub.max()
+
+print(f"club cu cea mai mare medie Overall este: {club_top}")
+print(f"medie overall: {media_top:.2f}")
+
+
+def converteste(x):
+    if pd.isna(x):
+        return 0
+
+    x = str(x).replace("€", "").strip()
+
+    if "M" in x:
+        return float(x.replace("M", "")) * 1_000_000
+
+    elif "K" in x:
+        return float(x.replace("K", "")) * 1_000
+
+    else:
+        return float(x)
+
+data["Value_num"] = data["Value"].apply(converteste)
+data["Wage_num"] = data["Wage"].apply(converteste)
+
+data["is_underpaid"] = data["Wage_num"] < (data["Value_num"] / 100)
+print(data[["Name", "Value", "Wage", "is_underpaid"]].head())
+
+
+data["Scor_general"] = (
+    0.3 * data["Overall"] +
+    0.3 * data["Potential"] +
+    0.2 * data["SprintSpeed"]
+)
+print(data[["Name", "Overall", "Potential", "SprintSpeed", "Scor_general"]].head())
+
 

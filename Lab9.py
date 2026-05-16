@@ -26,3 +26,23 @@ for col in coloanecateg:
     data.col=data[col].fillna('UNKNOWN')
     print("\n inlocuire cu unknown+mediana")
     print(data.head)
+#ex4
+from sklearn.preprocessing import LabelEncoder
+
+label_encoder = LabelEncoder()
+data['gender_encoded'] = label_encoder.fit_transform(data['gender'])
+
+print("\nValori gender dupa Label Encoding:")
+print(data[['gender', 'gender_encoded']].head())
+
+# One-Hot Encoding pentru celelalte variabile
+
+columns_for_onehot = [
+    'race/ethnicity',
+    'parental level of education',
+    'lunch',
+    'test preparation course'
+]
+
+onehot_df = pd.get_dummies(data, columns=columns_for_onehot)
+
